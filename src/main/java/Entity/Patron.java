@@ -65,6 +65,9 @@ public class Patron {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;  // Add this setter method
+    }
 
 
     public LocalDate getMembershipDate() {

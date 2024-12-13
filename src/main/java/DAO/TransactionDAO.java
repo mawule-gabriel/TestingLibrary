@@ -158,9 +158,9 @@ public class TransactionDAO {
                             int affectedRows = pstmtInsert.executeUpdate();
 
                             if (affectedRows > 0) {
-                                // Get the generated transaction ID
+                                // Get the generated keys
                                 try (ResultSet generatedKeys = pstmtInsert.getGeneratedKeys()) {
-                                    if (generatedKeys.next()) {
+                                    if (generatedKeys != null && generatedKeys.next()) {
                                         int transactionId = generatedKeys.getInt(1);
 
                                         // Now update the book status to "BORROWED"
@@ -177,8 +177,15 @@ public class TransactionDAO {
                                         // Optionally, you can return the transactionId for further processing
                                         System.out.println("Transaction created successfully with ID: " + transactionId);
                                         return true; // Successfully borrowed the book
+                                    } else {
+                                        // No generated keys were returned
+                                        System.err.println("No generated keys returned by the insert statement.");
+                                        return false;
                                     }
                                 }
+                            } else {
+                                System.err.println("No rows affected by the insert statement.");
+                                return false;
                             }
                         }
                     } catch (SQLException e) {
@@ -194,7 +201,6 @@ public class TransactionDAO {
         }
         return false; // Book not available for borrowing
     }
-
 
 
 }
