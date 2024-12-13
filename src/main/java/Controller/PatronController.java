@@ -8,10 +8,15 @@ import java.util.List;
 
 public class PatronController {
 
-    private final PatronService patronService;
+    private PatronService patronService;
 
     public PatronController() {
         this.patronService = new PatronService();
+    }
+
+    // Setter for PatronService (to allow injection in tests)
+    public void setPatronService(PatronService patronService) {
+        this.patronService = patronService;
     }
 
 
@@ -61,15 +66,16 @@ public class PatronController {
         }
     }
 
-    // Delete a patron
-    public void deletePatron(int patronId) {
+    public void deletePatron(int patronId) throws SQLException {
         try {
             patronService.deletePatron(patronId);
             System.out.println("Patron deleted successfully with ID: " + patronId);
         } catch (SQLException e) {
             System.err.println("Error deleting patron: " + e.getMessage());
+            throw e;  // Re-throw the SQLException to allow it to be caught in the test
         } catch (IllegalArgumentException e) {
             System.err.println("Validation error: " + e.getMessage());
         }
     }
+
 }

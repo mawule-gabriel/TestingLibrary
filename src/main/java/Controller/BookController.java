@@ -5,12 +5,10 @@ import Entity.Book;
 import Entity.Enums.BookStatus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public class BookController {
-    private final BookService bookService;
+    private BookService bookService;
 
     public BookController() {
         this.bookService = new BookService();
@@ -50,6 +48,11 @@ public class BookController {
     private String generateISBN() {
         // Generate a random 13-digit ISBN (simplified)
         return "978" + String.format("%010d", (long) (Math.random() * 10000000000L));
+    }
+
+    // Add a setter for bookService to allow injection in tests
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
     }
 
 
