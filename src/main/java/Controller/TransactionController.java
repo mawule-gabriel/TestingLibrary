@@ -13,8 +13,8 @@ import java.util.List;
 
 public class TransactionController {
 
-    private final TransactionService transactionService;
-    private final BookService bookService;
+    protected TransactionService transactionService;
+    protected BookService bookService;
 
     public TransactionController() {
         this.transactionService = new TransactionService();

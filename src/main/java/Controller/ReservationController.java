@@ -16,6 +16,11 @@ public class ReservationController {
         this.reservationService = new ReservationService();
     }
 
+    // Constructor allowing dependency injection
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+
     // Add a new reservation
     public void addReservation(Reservation reservation) {
         try {

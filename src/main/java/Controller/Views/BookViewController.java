@@ -73,7 +73,7 @@ public class BookViewController implements Initializable {
      * Validates the input, adds the book to the database, and reloads the table.
      */
     @FXML
-    private void handleAddBook() {
+    public void handleAddBook() {
         try {
             String title = titleField.getText();
             String author = authorField.getText();

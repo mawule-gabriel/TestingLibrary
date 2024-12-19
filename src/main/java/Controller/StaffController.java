@@ -16,6 +16,12 @@ public class StaffController {
         this.staffService = new StaffService();
     }
 
+    // Constructor injection: Inject dependencies into the constructor
+    public StaffController(StaffService staffService, StaffDAO staffDAO) {
+        this.staffService = staffService;
+        this.staffDAO = staffDAO;
+    }
+
     // Add a new staff member
     public void addStaff(Staff staff) {
         try {
