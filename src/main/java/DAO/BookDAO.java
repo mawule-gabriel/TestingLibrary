@@ -113,4 +113,19 @@ public class BookDAO {
         }
         return books;
     }
+
+    // Add this method to the BookDAO class
+    public String getBookTitle(int bookId) throws SQLException {
+        String query = "SELECT title FROM Books WHERE book_id = ?";
+        try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, bookId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("title");
+                }
+            }
+        }
+        return null; // return null if no book is found with the given ID
+    }
+
 }
