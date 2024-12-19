@@ -77,7 +77,6 @@ class BookDAOTest {
         Book result = bookDAO.getBookById(testBook.getBookId());
 
         assertNull(result, "Book should not be found with the given ID.");
-        assertNull(null);
     }
 
     @Test
@@ -194,7 +193,7 @@ class BookDAOTest {
         when(mockConnection.prepareStatement(anyString())).thenThrow(new SQLException("Database error"));
 
         assertThrows(SQLException.class, () -> {
-            BookDAO.getBookById(testBook.getBookId());
+            bookDAO.getBookById(testBook.getBookId());
         });
     }
 }
